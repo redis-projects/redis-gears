@@ -24,16 +24,19 @@ redis-cli -p 30003 CONFIG SET cluster-announce-ip 127.0.0.1
 
 # HowTo
 
-We will create Hash with age:...
-then have _count_modified_ and _last_modified_ added upon write (hset event)
-and _maxage added as real-time max counter
-and the change log of maxage added to stream _maxage_log
+- We will create sample data `person:...` HASH with `age: ...`
+- then have `_count_modified_` and `_last_modified_` automatically added upon write (hset EVENT)
+- and SET `_maxage` added as real-time max counter
+- and the change log of maxage XADD to STREAM `_maxage_log`
+
+- there is also an example cluster-distributed Gears BATCH compute of `avg()` age using aggregate accumulator
+
 
 ```
 ./setup.sh
 ```
 
-# Known issue
+# Known issues
 - When using cluster, the ./setup.sh script fails with the ID argument
 - Cannot use redisgears-py, have not found proper way to load it into server side gears which seems to be a requirement (that would then simplify setup.sh using python) [app_* file]
 - pip virtualenv not documented
@@ -77,9 +80,10 @@ HSET person:5 name "Shrimply Pibbles" age 87
 
 # Batch processing
 
-cat batch_avg.py| redis-cli -x RG.PYEXECUTE
+```
+cat batch_avg.py| redis-cli -x -p 30001 -c RG.PYEXECUTE
 
-gears-cli run batch_avg.py
-
+gears-cli run --port 30001 batch_avg.py
+```
 
 
