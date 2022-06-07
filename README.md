@@ -22,7 +22,7 @@ redis-cli -p 30002 CONFIG SET cluster-announce-ip 127.0.0.1
 redis-cli -p 30003 CONFIG SET cluster-announce-ip 127.0.0.1
 ```
 
-# HowTo
+# Scenario
 
 - We will create sample data `person:...` HASH with `age: ...`
 - then have `_count_modified_` and `_last_modified_` automatically added upon write (hset EVENT)
@@ -31,10 +31,34 @@ redis-cli -p 30003 CONFIG SET cluster-announce-ip 127.0.0.1
 
 - there is also an example cluster-distributed Gears BATCH compute of `avg()` age using aggregate accumulator
 
-
+The entire scenario can be played in one go using this script instead of running 1 by 1 commands.
 ```
 ./setup.sh
 ```
+
+# RediSearch
+
+Create index
+```
+FT.CREATE person_idx on HASH PREFIX 1
+person:
+SCHEMA
+name TEXT
+gender TAG
+age NUMERIC SORTABLE
+```
+
+Sample search and aggregate
+```
+FT.SEARCH person_idx "Smith"
+FT.SEARCH person_idx "Smit*"
+FT.SEARCH person_idx "-Smit*"
+
+FT.SEARCH person_idx "@age:[50 +inf]" SORTBY age DESC
+
+FT.AGGREGATE person_idx "*" GROUPBY 1 @gender REDUCE AVG 1 @age as maxage
+```
+
 
 # Known issues
 - When using cluster, the ./setup.sh script fails with the ID argument

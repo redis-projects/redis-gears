@@ -1,6 +1,18 @@
 from time import sleep
 
+def pause(x):
+  sleep(2)
 
+gb = GearsBuilder()
+gb.map(lambda x: int(x['value']['age']))
+gb.foreach(pause)
+gb.avg()
+gb.run('person:*')
+
+## Expected result: [42.0]
+
+
+### Optional - more detailled implementation
 def prepare_avg(a, x):
   ''' Accumulates sum and count of records '''
   a = a if a else (0, 0)  # accumulator is a tuple of sum and count
@@ -14,12 +26,14 @@ def compute_avg(x):
   # average is quotient of sum and count
   return x[0]/x[1]
 
-gb = GearsBuilder()
-gb.map(lambda x: int(x['value']['age']))
+#gb = GearsBuilder()
+#gb.map(lambda x: int(x['value']['age']))
 #gb.accumulate(prepare_avg)
 #gb.map(compute_avg)
-gb.foreach(lambda x: log(f"....{x} from {hashtag()}"))
-gb.avg()
-gb.run('person:*')
+#gb.foreach(lambda x: log(f"....{x} from {hashtag()}"))
+#gb.run('person:*')
 
-## Expected result: [42.0]
+
+
+
+

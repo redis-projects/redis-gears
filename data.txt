@@ -1,6 +1,6 @@
 SET foo bar
-HSET person:1 name "Rick Sanchez" age 70
-HSET person:2 name "Morty Smith" age 14
-HSET person:3 name "Summer Smith" age 17
-HSET person:4 name "Beth Smith" age 35
-HSET person:5 name "Shrimply Pibbles" age 87
+HSET person:1 name "Rick Sanchez" age 70 gender M
+HSET person:2 name "Morty Smith" age 14 gender M
+HSET person:3 name "Summer Smith" age 17 gender F
+HSET person:4 name "Beth Smith" age 35 gender F
+HSET person:5 name "Shrimply Pibbles" age 87 gender M
