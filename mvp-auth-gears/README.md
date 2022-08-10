@@ -99,6 +99,7 @@ e.g. `RG.TRIGGER <gears-api-name> <token_id> <keys[]> <obj_ref(optional)>`
 > **_NOTE:_**  response returns only eligible keys 
 
 \
+### Implementation Sequence Diagram
 ![MVP Seq Diagram](./images/mvp-seq.png)
 
 > **_NOTE:_**  the implementation could be more efficient by calling all the objects and iterating over them rather than obtaining their accessIds first, then filtering on keys. 
@@ -109,9 +110,9 @@ e.g. `RG.TRIGGER <gears-api-name> <token_id> <keys[]> <obj_ref(optional)>`
 This demo uses very simple test data: 
 
 The relationship between token_id/user_id is stored as a simple list of Key/Values:  
-- mvp:auth:id:abc123 : xxxx-yyyy-zzzz-1111
-- mvp:auth:id:abc123 : xxxx-yyyy-zzzz-2222
-- mvp:auth:id:abc123 : xxxx-yyyy-zzzz-3333
+- `mvp:auth:id:abc123 : xxxx-yyyy-zzzz-1111`
+- `mvp:auth:id:abc123 : xxxx-yyyy-zzzz-2222`
+- `mvp:auth:id:abc123 : xxxx-yyyy-zzzz-3333`
 
 Our data utilises a very simple JSON object mode: 
 
@@ -122,7 +123,7 @@ Our data utilises a very simple JSON object mode:
             ... 
         }, 
     "content": { ... }
-}'
+}
 ```
 
 1. Run the redismod docker container 
