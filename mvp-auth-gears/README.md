@@ -99,7 +99,9 @@ e.g. `RG.TRIGGER <gears-api-name> <token_id> <keys[]> <obj_ref(optional)>`
 > **_NOTE:_**  response returns only eligible keys 
 
 \
-### Implementation Sequence Diagram
+
+#### Implementation Sequence Diagram
+
 ![MVP Seq Diagram](./images/mvp-seq.png)
 
 > **_NOTE:_**  the implementation could be more efficient by calling all the objects and iterating over them rather than obtaining their accessIds first, then filtering on keys. 
