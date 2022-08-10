@@ -1,0 +1,6 @@
+LPUSH mvp:auth:id:abc123 'xxxx-yyyy-zzzz-1111'
+LPUSH mvp:auth:id:abc123 'xxxx-yyyy-zzzz-2222'
+LPUSH mvp:auth:id:abc123 'xxxx-yyyy-zzzz-3333'
+JSON.SET 'mvp:trades:id:001' $ '{"meta": { "objectId":"/trades/trade-001", "accessId":"xxxx-yyyy-zzzz-1111" }, "content": { "fieldA":"hello-world", "fieldB":"goodbye-world" }}'
+JSON.SET mvp:trades:id:002 $ '{"meta": { "objectId":"/trades/trade-002", "accessId":"xxxx-yyyy-zzzz-3333" }, "content": { "fieldA":"testing", "fieldB":"testing" }}'
+JSON.SET mvp:trades:id:003 $ '{"meta": { "objectId":"/trades/trade-003", "accessId":"xxxx-yyyy-zzzz-XXXX" }, "content": { "fieldA":"unknown", "fieldB":"redacted" }}'
